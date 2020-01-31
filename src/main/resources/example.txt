@@ -1,0 +1,9 @@
+3
+Walk,3mph
+Horse Trot,4mph
+Horse Gallop,6mph
+4
+Walk,20 mins,NE
+Horse Trot,1 hour,E
+Walk,20 mins,SW
+Horse Trot,1 hour,W

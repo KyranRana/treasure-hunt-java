@@ -1,0 +1,14 @@
+5
+Walk,3mph
+Run,6mph
+Horse Trot,4mph
+Horse Gallop,15mph
+Elephant Ride,6mph
+7
+Walk,32 days 20 mins,N
+Run,1 hour,E
+Horse Trot,3 hours,NW
+Elephant Ride,1 hour 30 mins,SE
+Horse Gallop,1 day 20 mins,SE
+Walk,30 mins,SW
+Horse Trot,1 hour 1 min,W
