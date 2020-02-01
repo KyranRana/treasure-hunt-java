@@ -9,7 +9,7 @@ import java.util.Map;
 import org.javatuples.Triplet;
 
 /**
- * Default treasure cmd.locator class.
+ * Default treasure locator class.
  *
  * <p>Given travels and steps, follows steps and provides location of the treasure relative from the
  * origin (allowing it to be directly travelled to).
@@ -57,12 +57,12 @@ public class DefaultTreasureLocator implements TreasureLocator {
           /*
            * Remember:
            *
-           * A_2 + B_2 = C_2
-           * B_2 + B_2 = C_2 (since A and B are equivalent)
-           * 2B_2 = C_2
-           * B_2 = C_2/2
-           * B = C/sqrt(2)
-           * B = C sqrt(2)/2
+           * A_2 + B_2  = C_2
+           * B_2 + B_2  = C_2 (since A and B are equivalent)
+           * 2B_2       = C_2
+           * B_2        = C_2/2
+           * B          = C/sqrt(2)
+           * B          = C sqrt(2)/2
            */
           Fraction distanceGoingDiagonal =
               new Fraction(1, time.getTotalMinutes(), MINUTES_IN_HOUR)
