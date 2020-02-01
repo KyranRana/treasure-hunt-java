@@ -22,7 +22,7 @@ public class DefaultInputDataValidation implements InputDataValidation {
     validateTravelApproximations(numberOfTravels, lines);
 
     int nextIndex = 1 + numberOfTravels;
-    String message = "Line " + nextIndex + " - expected number of directions!";
+    String message = "Line " + (nextIndex + 1) + " - expected number of directions!";
     validateIsTrue(nextIndex, size -> lines.length > size, message);
     validateIsTrue(lines[nextIndex], this::validateIsNumeric, message);
 
@@ -45,7 +45,7 @@ public class DefaultInputDataValidation implements InputDataValidation {
     Map<String, Boolean> travelsSeen = new HashMap<>();
 
     for (int i = 1; i <= ways; i++) {
-      String prefix = "Line " + i;
+      String prefix = "Line " + (i + 1);
       validateIsTrue(i, index -> lines.length > index, prefix + " must be a travel approximation!");
 
       String[] parts = lines[i].split(" *, *");
@@ -85,8 +85,8 @@ public class DefaultInputDataValidation implements InputDataValidation {
 
     for (int i = 1; i <= numberOfDirections; i++) {
       int currentIndex = startFrom + i;
-      String prefix = "Line " + currentIndex;
-      validateIsTrue(currentIndex, index -> lines.length > index, prefix + " must be a direction!");
+      String prefix = "Line " + (currentIndex + 1);
+      validateIsTrue(currentIndex, index -> lines.length > index, prefix + " - must be a direction!");
 
       String[] parts = lines[currentIndex].split(" *, *");
       validateIsTrue(

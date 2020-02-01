@@ -19,12 +19,12 @@ public class DefaultInputFileValidation implements InputFileValidation {
     String absolutePath = inputFile.toPath().toString();
 
     if (!inputFile.exists())
-      throw new FileNotFoundException(absolutePath);
+      throw new FileNotFoundException(String.format("File not found! (%s)", absolutePath));
 
     if (!inputFile.canRead())
-      throw new FileNotReadableException(absolutePath);
+      throw new FileNotReadableException(String.format("File not readable! (%s)", absolutePath));
 
     if (!URLConnection.getFileNameMap().getContentTypeFor(inputFile.getName()).equals("text/plain"))
-      throw new FileNotTextFileException(absolutePath);
+      throw new FileNotTextFileException(String.format("File not text file! (%s)", absolutePath));
   }
 }

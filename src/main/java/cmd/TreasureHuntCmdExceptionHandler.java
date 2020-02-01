@@ -24,7 +24,7 @@ public class TreasureHuntCmdExceptionHandler implements IExecutionExceptionHandl
       CommandLine commandLine,
       ParseResult parseResult) {
 
-    commandLine.getErr().println(ex.getMessage() + " " + Arrays.toString(ex.getStackTrace()));
+    commandLine.getErr().println(ex.getMessage());
 
     return commandLine.getExitCodeExceptionMapper() != null
         ? commandLine.getExitCodeExceptionMapper().getExitCode(ex)
