@@ -22,12 +22,12 @@ import lombok.ToString;
  *       <pre>
  *         How we end up with (B = H sqrt(2) / 2)
  *
- *         A_2 + B_2 = C_2
- *         B_2 + B_2 = C_2 (since A and B are equivalent)
- *         2B_2 = C_2
- *         B_2 = C_2/2
- *         B = C/sqrt(2)
- *         B = C sqrt(2)/2
+ *         A_2 + B_2  = C_2
+ *         B_2 + B_2  = C_2 (since A and B are equivalent)
+ *         2B_2       = C_2
+ *         B_2        = C_2/2
+ *         B          = C/sqrt(2)
+ *         B          = C sqrt(2)/2
  *       </pre>
  *       <pre>
  *            L
