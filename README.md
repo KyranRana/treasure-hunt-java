@@ -6,7 +6,7 @@ This program can be run with the steps below:
 
 1. Go into the directory of this project using command line.
 1. Install the program with `gradlew clean install`
-1. Run the word counter command using `./build/install/treasurehunt/bin/treasurehunt --help`
+1. Run the treasure hunt command using `./build/install/treasurehunt/bin/treasurehunt --help`
 
 ### Input File Format
 
