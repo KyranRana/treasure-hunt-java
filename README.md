@@ -6,15 +6,15 @@ This program can be run with the steps below:
 
 1. Go into the directory of this project using command line.
 1. Install the program with `gradlew clean install`
-1. Run the treasure hunt command using `./build/install/treasurehunt/bin/treasurehunt --help`
+1. Run the treasure hunt command using `./build/install/TreasureHunt/bin/TreasureHunt --help`
 
 ### Input File Format
 
 <ul>
-  <li>Number of ways to travel (format: {integer})</li>
+  <li>Number of ways to travel (format: {integer}).</li>
   <li>Approximations on speeds for different ways of travel (format: {string},{integer}mph).</li>
   <li>Number of directions (format: {integer}).</li>
-  <li>Directions to take to locate the treasure from origin (format: {string},{Time},{Direction})"</li>
+  <li>Directions to take to locate the treasure from origin (format: {string},{Time},{Direction})."</li>
 </ul>
 
 Where:
