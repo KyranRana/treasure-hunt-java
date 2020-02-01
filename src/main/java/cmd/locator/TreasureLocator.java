@@ -6,7 +6,7 @@ import java.util.Map;
 import org.javatuples.Triplet;
 
 /**
- * Contract for treasure cmd.locator class.
+ * Contract for treasure locator class.
  *
  * @author kyranrana
  */
