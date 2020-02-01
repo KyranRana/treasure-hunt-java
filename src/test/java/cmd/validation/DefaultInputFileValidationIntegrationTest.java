@@ -72,6 +72,6 @@ public class DefaultInputFileValidationIntegrationTest {
     URL testFileURL = classLoader.getResource(TEST_DIR_PREFIX);
     String fileURL = Objects.requireNonNull(testFileURL).getFile();
 
-    inputFileValidation.validate(new File(fileURL + "/file-not-text-file.pdf"));
+    inputFileValidation.validate(new File(fileURL + "/file-not-text-file-test.pdf"));
   }
 }
