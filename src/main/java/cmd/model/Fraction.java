@@ -22,10 +22,10 @@ public class Fraction {
   private final long denominator;
 
   /**
-   * Multiplies this fraction by another fraction, returning a new simplified fraction.
+   * Multiply this fraction with another fraction.
    *
-   * @param fraction Other fraction.
-   * @return Simplified fraction.
+   * @param fraction The other fraction.
+   * @return The answer.
    */
   public Fraction multiply(Fraction fraction) {
     long newNumerator = numerator * fraction.getNumerator();
@@ -40,26 +40,28 @@ public class Fraction {
   }
 
   /**
-   * Adds this fraction to another fraction, returning a new simplified fraction.
+   * Adds this fraction to another fraction.
    *
-   * @param fraction Other fraction.
-   * @return Simplified fraction.
+   * @param fraction The other fraction.
+   * @return The answer.
    */
   public Fraction add(Fraction fraction) {
-    long commonDenominator = MathUtil.lcm(denominator, fraction.getDenominator());
+    long newDenominator = MathUtil.lcm(denominator, fraction.getDenominator());
 
-    long thisFractionMultiplier = commonDenominator / denominator;
-    long thatFractionMultiplier = commonDenominator / fraction.getDenominator();
+    long newNumerator = sign * numerator * (newDenominator / denominator);
+    newNumerator +=
+        fraction.getSign()
+            * fraction.getNumerator()
+            * (newDenominator / fraction.getDenominator());
 
-    long newNumerator =
-        (sign * numerator * thisFractionMultiplier)
-            + (fraction.getSign() * fraction.getNumerator() * thatFractionMultiplier);
-
-    long gcd = MathUtil.gcd(newNumerator, commonDenominator);
+    long gcd = MathUtil.gcd(newNumerator, newDenominator);
 
     newNumerator /= gcd;
-    commonDenominator /= gcd;
+    newDenominator /= gcd;
 
-    return new Fraction(newNumerator < 0 ? -1 : 1, Math.abs(newNumerator), commonDenominator);
+    int newSign = newNumerator < 0 ? -1 : 1;
+    newNumerator *= newSign;
+
+    return new Fraction(newSign, newNumerator, newDenominator);
   }
 }

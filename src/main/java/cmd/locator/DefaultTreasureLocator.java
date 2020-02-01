@@ -55,8 +55,6 @@ public class DefaultTreasureLocator implements TreasureLocator {
         case "SE":
         case "SW":
           /*
-           * Remember:
-           *
            * A_2 + B_2  = C_2
            * B_2 + B_2  = C_2 (since A and B are equivalent)
            * 2B_2       = C_2

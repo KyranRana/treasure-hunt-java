@@ -10,14 +10,6 @@ import java.net.URLConnection;
 /**
  * Default input file validation class.
  *
- * <p>Responsibilities:
- *
- * <ul>
- *   <li>Checks if file exists.
- *   <li>Checks if file is readable.
- *   <li>Checks if file is a text file.
- * </ul>
- *
  * @author kyranrana
  */
 public class DefaultInputFileValidation implements InputFileValidation {

@@ -28,8 +28,10 @@ import lombok.ToString;
  *         B_2        = C_2/2
  *         B          = C/sqrt(2)
  *         B          = C sqrt(2)/2
- *       </pre>
- *       <pre>
+ *
+ *
+ *        Visual representation:
+ *
  *            L
  *          ------
  *          \    |
@@ -64,7 +66,9 @@ public class Dimension {
   }
 
   public double toDecimal() {
-    return (number.getSign() * ((double) number.getNumerator() / (double) number.getDenominator()))
-        + (radical.getSign() * ((radical.getNumerator() * Math.sqrt(2)) / (double) radical.getDenominator()));
+    double newNumber = (double) number.getNumerator() / (double) number.getDenominator();
+    double newRadical = (radical.getNumerator() * Math.sqrt(2)) / (double) radical.getDenominator();
+
+    return (number.getSign() * newNumber) + (radical.getSign() * newRadical);
   }
 }

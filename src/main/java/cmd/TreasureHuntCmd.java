@@ -51,7 +51,9 @@ public class TreasureHuntCmd implements Callable<Integer> {
   @Parameters(index = "0", description = "The input file.")
   private File textFile;
 
-  @Option(names = {"-v", "--verbose"}, description = "True to enable verbose mode")
+  @Option(
+      names = {"-v", "--verbose"},
+      description = "True to enable verbose mode")
   private boolean verbose;
 
   /**
@@ -91,35 +93,13 @@ public class TreasureHuntCmd implements Callable<Integer> {
     String[] linesInFile = FileUtil.readFile(textFile).split(System.lineSeparator());
     (new DefaultInputDataValidation()).validate(linesInFile);
 
-    Map<String, Integer> travels = new HashMap<>();
-
-    int numberOfTravels = Integer.parseInt(linesInFile[0]);
-    for (int i = 1; i <= numberOfTravels; i++) {
-      String[] travelAndSpeed = linesInFile[i].split(" *, *");
-      travels.put(travelAndSpeed[0], Integer.parseInt(travelAndSpeed[1].replaceFirst("mph", "")));
-
-      if (verbose) {
-        System.out.println("-- Noted travel: " + linesInFile[i]);
-      }
-    }
-
-    List<Triplet<String, String, String>> directions = new ArrayList<>();
+    Map<String, Integer> travels = getTravels(linesInFile);
 
     if (verbose) {
       System.out.println();
     }
 
-    int numberOfDirections = Integer.parseInt(linesInFile[1 + numberOfTravels]);
-    for (int i = 0; i < numberOfDirections; i++) {
-      int currentIndex = i + numberOfTravels + 2;
-      String[] direction = linesInFile[currentIndex].split(" *, *");
-      directions.add(new Triplet<>(direction[0], direction[1], direction[2]));
-
-      if (verbose) {
-        System.out.println("-- Noted step: " + linesInFile[currentIndex]);
-      }
-    }
-
+    List<Triplet<String, String, String>> directions = getDirections(linesInFile, travels.size());
     Location treasureLocation = (new DefaultTreasureLocator()).locate(travels, directions);
 
     Dimension dimensionX = treasureLocation.getX();
@@ -152,5 +132,53 @@ public class TreasureHuntCmd implements Callable<Integer> {
     }
 
     return 1;
+  }
+
+  /**
+   * Get travels.
+   *
+   * @param linesInFile Lines in file.
+   * @return Travels.
+   */
+  private Map<String, Integer> getTravels(String[] linesInFile) {
+    Map<String, Integer> travels = new HashMap<>();
+
+    int numberOfTravels = Integer.parseInt(linesInFile[0]);
+    for (int i = 1; i <= numberOfTravels; i++) {
+      String[] travelAndSpeed = linesInFile[i].split(" *, *");
+
+      int speed = Integer.parseInt(travelAndSpeed[1].replaceFirst("mph", ""));
+      travels.put(travelAndSpeed[0], speed);
+
+      if (verbose) {
+        System.out.println("-- Noted travel: " + linesInFile[i]);
+      }
+    }
+    return travels;
+  }
+
+  /**
+   * Get directions.
+   *
+   * @param linesInFile Lines in file.
+   * @return Directions.
+   */
+  private List<Triplet<String, String, String>> getDirections(
+      String[] linesInFile, int numberOfTravels) {
+
+    List<Triplet<String, String, String>> directions = new ArrayList<>();
+
+    int numberOfDirections = Integer.parseInt(linesInFile[1 + numberOfTravels]);
+    for (int i = 0; i < numberOfDirections; i++) {
+      int currentIndex = i + numberOfTravels + 2;
+
+      String[] direction = linesInFile[currentIndex].split(" *, *");
+      directions.add(new Triplet<>(direction[0], direction[1], direction[2]));
+
+      if (verbose) {
+        System.out.println("-- Noted step: " + linesInFile[currentIndex]);
+      }
+    }
+    return directions;
   }
 }

@@ -8,31 +8,6 @@ import java.util.function.Function;
 /**
  * Default input data validation class.
  *
- * <p>Responsibilities
- *
- * <ul>
- *   <li>Checks data in file is syntactically correct following:
- *       <ul>
- *         <li>Number of ways to travel (format: {integer}).
- *         <li>Approximations on speeds for different ways of travel (format:
- *             {string},{integer}mph).
- *         <li>Number of directions (format: {integer}).
- *         <li>Directions to take to locate the treasure from origin (format:
- *             {string},{Time},{Direction})
- *       </ul>
- *       <p>Where:
- *       <ul>
- *         <li>{Time} = One of
- *             <ul>
- *               <li>{integer} days [{integer} hours [{integer} mins]]
- *               <li>{integer} hours [{integer} mins]
- *               <li>{integer} mins
- *             </ul>
- *         <li>{Direction} = One of: NS,E,W,NW,NE,SW,SE
- *       </ul>
- *   <li>Checks directions do not specify an unknown travel method.
- * </ul>
- *
  * @author kyranrana
  */
 public class DefaultInputDataValidation implements InputDataValidation {
@@ -61,7 +36,7 @@ public class DefaultInputDataValidation implements InputDataValidation {
   }
 
   /**
-   * Validates lines 1...ways are valid travel approximations.
+   * Validates travel approximations are valid.
    *
    * @param ways Ways.
    * @param lines Lines.
@@ -98,7 +73,7 @@ public class DefaultInputDataValidation implements InputDataValidation {
   }
 
   /**
-   * Validates lines startFrom...(startFrom + numberOfDirection) are valid directions.
+   * Validates directions are valid.
    *
    * @param numberOfDirections Number of directions.
    * @param startFrom Starting point.
@@ -131,13 +106,7 @@ public class DefaultInputDataValidation implements InputDataValidation {
   }
 
   /**
-   * Validates string is in either of the following formats:
-   *
-   * <ul>
-   *   <li>{integer} days [{integer} hours [{integer} mins]]
-   *   <li>{integer} hours [{integer} mins]
-   *   <li>{integer} mins
-   * </ul>
+   * Validates time.
    *
    * @param prefix Prefix (used to show line)
    * @param string String
@@ -174,7 +143,7 @@ public class DefaultInputDataValidation implements InputDataValidation {
   }
 
   /**
-   * Validates time parts complies with format: {integer} hours {integer} mins
+   * Validates time with 2 parts is valid.
    *
    * @param parts Parts
    * @param exceptionMsg Exception message in failure.
