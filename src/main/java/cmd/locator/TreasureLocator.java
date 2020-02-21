@@ -18,6 +18,7 @@ public interface TreasureLocator {
    *
    * @param travels Different modes of travel.
    * @param steps Steps to take to get to the treasure.
+   * @return The location relative from origin.
    */
   Location locate(Map<String, Integer> travels, List<Triplet<String, String, String>> steps);
 }
