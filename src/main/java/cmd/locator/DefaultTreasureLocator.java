@@ -1,4 +1,4 @@
-package cmd.treasurelocator;
+package cmd.locator;
 
 import cmd.model.Dimension;
 import cmd.model.Direction;
@@ -6,7 +6,6 @@ import cmd.model.Fraction;
 import cmd.model.Location;
 import cmd.model.Time;
 import cmd.model.TreasureInputData;
-import cmd.model.builder.TimeBuilder;
 import java.util.List;
 import java.util.Map;
 import org.javatuples.Triplet;

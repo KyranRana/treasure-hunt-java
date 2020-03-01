@@ -17,8 +17,7 @@ public class TreasureInputDataBuilder {
     int numberOfTravels = Integer.parseInt(lines.get(0));
     for (int i = 0; i < numberOfTravels; i++) {
       String[] parts = lines.get(i + 1).split(",");
-      int speed = Integer.parseInt(parts[1].replace("mph", ""));
-      travels.put(parts[0], speed);
+      travels.put(parts[0], Integer.parseInt(parts[1].replace("mph", "")));
     }
 
     List<Triplet<String, Time, Direction>> directions = new ArrayList<>();
@@ -26,8 +25,7 @@ public class TreasureInputDataBuilder {
     int numberOfDirections = Integer.parseInt(lines.get(numberOfTravels + 1));
     for (int i = 0; i < numberOfDirections; i++) {
       String[] parts = lines.get(i + numberOfTravels + 2).split(",");
-      Time time = TimeBuilder.buildFromString(parts[1]);
-      directions.add(new Triplet<>(parts[0], time, Direction.valueOf(parts[2])));
+      directions.add(new Triplet<>(parts[0], TimeBuilder.buildFromString(parts[1]), Direction.valueOf(parts[2])));
     }
 
     return new TreasureInputData(travels, directions);

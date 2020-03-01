@@ -1,8 +1,8 @@
 package cmd;
 
+import cmd.locator.DefaultTreasureLocator;
 import cmd.model.Location;
 import cmd.model.builder.TreasureInputDataBuilder;
-import cmd.treasurelocator.DefaultTreasureLocator;
 import cmd.util.FileUtil;
 import cmd.validation.DefaultInputFileValidation;
 import cmd.validation.TreasureInputDataValidation;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 @Command(

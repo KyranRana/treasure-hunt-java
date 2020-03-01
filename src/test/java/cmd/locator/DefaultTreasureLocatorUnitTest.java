@@ -1,4 +1,4 @@
-package cmd.treasurelocator;
+package cmd.locator;
 
 import static org.junit.Assert.assertEquals;
 

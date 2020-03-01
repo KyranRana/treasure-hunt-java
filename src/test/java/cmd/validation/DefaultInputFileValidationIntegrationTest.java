@@ -4,7 +4,6 @@ import cmd.exception.validation.FileNotReadableException;
 import cmd.exception.validation.FileNotTextFileException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.Objects;
 import org.junit.Test;
 
