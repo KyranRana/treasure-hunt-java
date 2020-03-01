@@ -4,27 +4,35 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-/**
- * Unit tests for {@link Time}
- *
- * @author kyranrana
- */
 public class TimeUnitTest {
 
-  /**
-   * <p>Given {@link Time} with days, hours and minutes.
-   *
-   * <p>When {@link Time#getTotalMinutes()} is called.
-   *
-   * <p>Then expect total minutes utilised by {@link Time}
-   */
   @Test
-  public void getTotalMinutes_isOk() {
-    assertEquals(30, new Time("30 mins").getTotalMinutes());
-    assertEquals(180, new Time("3 hours").getTotalMinutes());
-    assertEquals(1440, new Time("1 day").getTotalMinutes());
-    assertEquals(4320, new Time("3 days").getTotalMinutes());
-    assertEquals(4350, new Time("3 days 30 mins").getTotalMinutes());
-    assertEquals(4410, new Time("3 days 1 hour 30 mins").getTotalMinutes());
+  public void getTotalMinutes_isOk1() {
+    assertEquals(30, new Time(0, 0, 30).getTotalMinutes());
+  }
+
+  @Test
+  public void getTotalMinutes_isOk2() {
+    assertEquals(180, new Time(0, 3, 0).getTotalMinutes());
+  }
+
+  @Test
+  public void getTotalMinutes_isOk3() {
+    assertEquals(1440, new Time(1, 0, 0).getTotalMinutes());
+  }
+
+  @Test
+  public void getTotalMinutes_isOk4() {
+    assertEquals(4320, new Time(3, 0, 0).getTotalMinutes());
+  }
+
+  @Test
+  public void getTotalMinutes_isOk5() {
+    assertEquals(4350, new Time(3, 0, 30).getTotalMinutes());
+  }
+
+  @Test
+  public void getTotalMinutes_isOk6() {
+    assertEquals(4410, new Time(3, 1, 30).getTotalMinutes());
   }
 }

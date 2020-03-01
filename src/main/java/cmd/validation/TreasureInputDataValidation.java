@@ -1,54 +1,47 @@
 package cmd.validation;
 
 import cmd.exception.validation.InputMalformedException;
+import cmd.model.Direction;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
-/**
- * Default input data validation class.
- *
- * @author kyranrana
- */
-public class DefaultInputDataValidation implements InputDataValidation {
+public class TreasureInputDataValidation implements InputDataValidation {
 
   @Override
-  public void validate(String[] lines) {
-    validateIsTrue(lines.length, size -> size > 3, "Input should consist of at least 4 lines!");
+  public void validate(List<String> lines) {
+    validateIsTrue(lines.size(), size -> size > 3, "Input should consist of at least 4 lines!");
     validateIsTrue(
-        lines[0], this::validateIsNumeric, "Line 1 - expected number of ways to travel!");
+        lines.get(0), this::validateIsNumeric, "Line 1 - expected number of ways to travel!");
 
-    int numberOfTravels = Integer.parseInt(lines[0]);
+    int numberOfTravels = Integer.parseInt(lines.get(0));
     validateTravelApproximations(numberOfTravels, lines);
 
     int nextIndex = 1 + numberOfTravels;
     String message = "Line " + (nextIndex + 1) + " - expected number of directions!";
-    validateIsTrue(nextIndex, size -> lines.length > size, message);
-    validateIsTrue(lines[nextIndex], this::validateIsNumeric, message);
+    validateIsTrue(nextIndex, size -> lines.size() > size, message);
+    validateIsTrue(lines.get(nextIndex), this::validateIsNumeric, message);
 
     Map<String, Boolean> travelsSeen = new HashMap<>();
     for (int i = 1; i <= numberOfTravels; i++) {
-      String line = lines[i];
+      String line = lines.get(i);
       travelsSeen.put(line.substring(0, line.indexOf(",")), true);
     }
-    int numberOfDirections = Integer.parseInt(lines[nextIndex]);
+    int numberOfDirections = Integer.parseInt(lines.get(nextIndex));
     validateDirections(numberOfDirections, nextIndex, lines, travelsSeen);
   }
 
-  /**
-   * Validates travel approximations are valid.
-   *
-   * @param ways Ways.
-   * @param lines Lines.
-   */
-  private void validateTravelApproximations(int ways, String[] lines) {
+  private void validateTravelApproximations(int ways, List<String> lines) {
     Map<String, Boolean> travelsSeen = new HashMap<>();
 
     for (int i = 1; i <= ways; i++) {
       String prefix = "Line " + (i + 1);
-      validateIsTrue(i, index -> lines.length > index, prefix + " must be a travel approximation!");
+      validateIsTrue(i, index -> lines.size() > index, prefix + " must be a travel approximation!");
 
-      String[] parts = lines[i].split(" *, *");
+      String[] parts = lines.get(i).split(" *, *");
       validateIsTrue(
           parts,
           theParts -> theParts.length == 2,
@@ -72,23 +65,16 @@ public class DefaultInputDataValidation implements InputDataValidation {
     }
   }
 
-  /**
-   * Validates directions are valid.
-   *
-   * @param numberOfDirections Number of directions.
-   * @param startFrom Starting point.
-   * @param lines Lines.
-   * @param travelsSeen Travels.
-   */
   private void validateDirections(
-      int numberOfDirections, int startFrom, String[] lines, Map<String, Boolean> travelsSeen) {
+      int numberOfDirections, int startFrom, List<String> lines, Map<String, Boolean> travelsSeen) {
 
     for (int i = 1; i <= numberOfDirections; i++) {
       int currentIndex = startFrom + i;
       String prefix = "Line " + (currentIndex + 1);
-      validateIsTrue(currentIndex, index -> lines.length > index, prefix + " - must be a direction!");
+      validateIsTrue(
+          currentIndex, index -> lines.size() > index, prefix + " - must be a direction!");
 
-      String[] parts = lines[currentIndex].split(" *, *");
+      String[] parts = lines.get(currentIndex).split(" *, *");
       validateIsTrue(
           parts,
           theParts -> theParts.length == 3,
@@ -101,16 +87,12 @@ public class DefaultInputDataValidation implements InputDataValidation {
       validateIsTrue(
           parts[2],
           this::validateIsCompassDirection,
-          prefix + " - valid directions are: NS,E,W,NW,NE,SW,SE");
+          prefix
+              + " - valid directions are: "
+              + Arrays.stream(Direction.values()).map(Enum::name).collect(Collectors.joining(",")));
     }
   }
 
-  /**
-   * Validates time.
-   *
-   * @param prefix Prefix (used to show line)
-   * @param string String
-   */
   private void validateTime(String prefix, String string) {
     String[] parts = string.split(" +");
     String exceptionMsg = prefix + " - time is invalid!";
@@ -126,12 +108,6 @@ public class DefaultInputDataValidation implements InputDataValidation {
     }
   }
 
-  /**
-   * Validates time part complies with format: {integer} mins
-   *
-   * @param parts Parts
-   * @param exceptionMsg Exception message in failure.
-   */
   private void validate1PartTime(String[] parts, String exceptionMsg) {
     validateIsTrue(parts[0], this::validateIsNumeric, exceptionMsg);
 
@@ -142,12 +118,6 @@ public class DefaultInputDataValidation implements InputDataValidation {
     validateIsTrue(parts[1], thePart -> thePart.matches(daysHoursMinutesText), exceptionMsg);
   }
 
-  /**
-   * Validates time with 2 parts is valid.
-   *
-   * @param parts Parts
-   * @param exceptionMsg Exception message in failure.
-   */
   private void validate2PartTime(String[] parts, String exceptionMsg) {
     validateIsTrue(parts[0], this::validateIsNumeric, exceptionMsg);
 
@@ -169,12 +139,6 @@ public class DefaultInputDataValidation implements InputDataValidation {
         exceptionMsg);
   }
 
-  /**
-   * Validates time parts complies with format: {integer} days {integer} hours {integer} mins
-   *
-   * @param parts Parts
-   * @param exceptionMsg Exception message in failure.
-   */
   private void validate3PartTime(String[] parts, String exceptionMsg) {
     validateIsTrue(parts[0], this::validateIsNumeric, exceptionMsg);
 
@@ -195,41 +159,21 @@ public class DefaultInputDataValidation implements InputDataValidation {
     validateIsTrue(parts[5], thePart -> thePart.equals(minutes > 1 ? "mins" : "min"), exceptionMsg);
   }
 
-  /**
-   * Validates string meets condition, otherwise throws exception message.
-   *
-   * @param string The string.
-   * @param condition The condition.
-   * @param exceptionMsg The exceptionMessage.
-   */
   private <T> void validateIsTrue(T string, Function<T, Boolean> condition, String exceptionMsg) {
     if (!condition.apply(string)) {
       throw new InputMalformedException(exceptionMsg);
     }
   }
 
-  /**
-   * Validates string is a valid compass direction.
-   *
-   * @param string String
-   */
-  private boolean validateIsCompassDirection(String string) {
-    return string.equals("N")
-        || string.equals("NS")
-        || string.equals("E")
-        || string.equals("W")
-        || string.equals("NW")
-        || string.equals("NE")
-        || string.equals("SW")
-        || string.equals("SE");
+  private boolean validateIsCompassDirection(String direction) {
+    try {
+      Direction.valueOf(direction);
+      return true;
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
   }
 
-  /**
-   * Validates string is in format: {integer}mph
-   *
-   * @param string The string.
-   * @return True if string is in format: {integer}mph
-   */
   private boolean validateIsNumberAndMph(String string) {
     int lengthOfString = string.length();
 
@@ -241,12 +185,6 @@ public class DefaultInputDataValidation implements InputDataValidation {
     return validateIsNumeric(string.substring(0, lengthOfString - 3));
   }
 
-  /**
-   * Validates string consists of letters.
-   *
-   * @param string The string.
-   * @return TRUE if string is text.
-   */
   private boolean validateIsText(String string) {
     for (int i = 0; i < string.length(); i++) {
       char character = string.charAt(i);
@@ -257,12 +195,6 @@ public class DefaultInputDataValidation implements InputDataValidation {
     return true;
   }
 
-  /**
-   * Validates string is numeric.
-   *
-   * @param string The string.
-   * @return TRUE if string is numeric.
-   */
   private boolean validateIsNumeric(String string) {
     try {
       Integer.parseInt(string);

@@ -6,27 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-/**
- * Represents a fraction.
- *
- * @author kyranrana
- */
 @AllArgsConstructor
 @EqualsAndHashCode
 @Getter
-@ToString
 public class Fraction {
 
   private final int sign;
   private final long numerator;
   private final long denominator;
 
-  /**
-   * Multiply this fraction with another fraction.
-   *
-   * @param fraction The other fraction.
-   * @return The answer.
-   */
   public Fraction multiply(Fraction fraction) {
     long newNumerator = numerator * fraction.getNumerator();
     long newDenominator = denominator * fraction.getDenominator();
@@ -39,20 +27,11 @@ public class Fraction {
     return new Fraction(sign * fraction.getSign(), newNumerator, newDenominator);
   }
 
-  /**
-   * Adds this fraction to another fraction.
-   *
-   * @param fraction The other fraction.
-   * @return The answer.
-   */
   public Fraction add(Fraction fraction) {
     long newDenominator = MathUtil.lcm(denominator, fraction.getDenominator());
 
     long newNumerator = sign * numerator * (newDenominator / denominator);
-    newNumerator +=
-        fraction.getSign()
-            * fraction.getNumerator()
-            * (newDenominator / fraction.getDenominator());
+    newNumerator += fraction.getSign() * fraction.getNumerator() * (newDenominator / fraction.getDenominator());
 
     long gcd = MathUtil.gcd(newNumerator, newDenominator);
 

@@ -7,11 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLConnection;
 
-/**
- * Default input file validation class.
- *
- * @author kyranrana
- */
 public class DefaultInputFileValidation implements InputFileValidation {
 
   @Override

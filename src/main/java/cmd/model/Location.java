@@ -4,11 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-/**
- * Represents a location.
- *
- * @author kyranrana
- */
 @AllArgsConstructor
 @EqualsAndHashCode
 @Getter
