@@ -6,12 +6,13 @@
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/info.picocli/picocli-codegen/4.1.4/f0d2349bada14a86d4f6afdde3b7d697f9cb6a2b/picocli-codegen-4.1.4.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.10/625fc0055674dff70dbc76efa36d0f2c89b04a24/lombok-1.18.10.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/info.picocli/picocli-codegen/4.1.4/f0d2349bada14a86d4f6afdde3b7d697f9cb6a2b/picocli-codegen-4.1.4.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.1.4/e9ac7856611815391f85ac66c8ceadacb51250b5/picocli-4.1.4.jar" />
         </processorPath>
         <module name="TreasureHunt.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>
