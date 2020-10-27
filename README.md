@@ -1,4 +1,5 @@
 ![Java CI with Gradle](https://github.com/KyranRana/treasure-hunt-java/workflows/Java%20CI%20with%20Gradle/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Treasure Hunt
 
